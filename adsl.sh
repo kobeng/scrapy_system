@@ -42,5 +42,5 @@ while [ "$oldip" == "$newip" ]; do
 
 done
 
-lynx -source -auth=kobeng88:kobeng831207 "http://members.3322.net/dyndns/update?system=dyndns&hostname=scrapy072.f3322.org"
-#lynx -source -auth=kobeng8:kobeng831207 "http://members.3322.net/dyndns/update?system=dyndns&hostname=scrapy71.f3322.org"
+#lynx -source -auth= "http://members.3322.net/dyndns/update?system=dyndns&hostname=scrapy072.f3322.org"
+#lynx -source -auth= "http://members.3322.net/dyndns/update?system=dyndns&hostname=scrapy71.f3322.org"

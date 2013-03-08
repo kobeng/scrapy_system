@@ -1,7 +1,7 @@
 <?php
 
 $host = "192.168.0.71";
-$mongo = new MongoClient("mongodb://scrapy:scrapybiz72@120.31.132.248:17007/scrapy");
+$mongo = new MongoClient("mongodb:///scrapy");
 
 include '/home/scrapy/create_scrapy_project/api.php';
 
