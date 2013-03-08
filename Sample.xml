@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Document   : dmoz.xml
+    Created on : 2012年2月1日, 下午7:17
+    Author     : kobeng
+    Description:
+        Purpose of the document follows.
+-->
+
+<scrapy>
+    <spider>
+        <!--爬虫入口-->
+        <start_urls>["http://www.alighting.cn/news/"]</start_urls>
+        
+        <!--
+        #入口页面变量定义
+        #从入口页是列表页面汇总（例如首页），那么拿到所有列表页面的url start_urls_type = "index"
+        #或者
+        #从入口页是列表页面（例如标签页面），那么拿到所有最终页面的url start_urls_type = "list"
+        -->
+        <start_urls_type>'index'</start_urls_type>
+        
+        <!--
+        #当start_urls_type = index 才要填写
+        #提取入口页面的规则是通过 正则 还是 通过 xpath
+        #start_urls_rule = "regular"    
+        #start_urls_rule = "xpath"
+        #其实如果入口页面的index 那么基本只能通过正则匹配出所有列表的页面 
+        #当然如果某网站的列表页面的url可以通过xpath规则提取，那么你也可以通过xpath规则提取列表页面的url
+        start_urls_rule = "regular"
+        #start_urls_rule = "xpath"
+        -->
+        <start_urls_rule>'xpath'</start_urls_rule>
+        
+        <!--
+        #当start_urls_type = index 才要填写
+        #提取入口页面的规则表达式
+        #为空请加一对单引号 <start_urls_rule_expression>''</start_urls_rule_expression>
+        start_urls_rule_expression = [r'/news/\w+/index\.htm$']
+        #start_urls_rule_expression = '//div[@class="entry-thumbnails"]/a/@href'
+        -->
+        <start_urls_rule_expression>[r'/news/\w+/index\.htm$']</start_urls_rule_expression>
+        
+        <!--
+        #当start_urls_type = index 才要填写
+        #如果设置了 start_urls_rule = "regular"
+        #那么这个值才生效
+        #为空请加一对单引号<start_urls_ruleXpathExpression>''</start_urls_ruleXpathExpression> 
+        #在xpath规则下拿到的html 然后再去匹配正则规则 从而拿到相对应的连接 
+        #这个值是填写xpath表达式
+        start_urls_ruleXpathExpression = ''  
+        -->
+        <start_urls_ruleXpathExpression>'//div[@class="entry-thumbnails"]/a/@href'</start_urls_ruleXpathExpression>       
+       
+        
+        <!--
+        ############################################################################################
+        列表页面下一页变量定义
+        ############################################################################################
+        -->
+        
+        <!--
+        #提取下一页面的url规则是通过 正则 还是 通过 xpath
+        #通过规则提取下一页的url可以返回一条url 也可以返回多条url
+        #next_page_urls_rule = "regular"    
+        #next_page_urls_rule = "xpath"
+        next_page_urls_rule = "xpath"
+        #next_page_urls_rule = "regular"
+        -->
+        <next_page_urls_rule>'xpath'</next_page_urls_rule>
+        
+        <!--
+        #提取下一页面的规则表达式
+        next_page_rule_expression = '//div[@class="gy-page"]/a[last()-1]/@href'
+        #next_page_rule_expression = r'http://mindhacks\.cn/page/\d+/$'
+        -->
+        <next_page_rule_expression>'//div[@class="gy-page"]/a[last()-1]/@href'</next_page_rule_expression>
+        
+        <!--
+        #如果设置了 next_page_urls_rule = "regular"
+        #那么这个值才生效
+        #为空请加一对单引号 <next_page_url_ruleXpathExpression>''</next_page_url_ruleXpathExpression>
+        #在xpath规则下拿到的html 然后再去匹配正则规则 从而拿到相对应的连接
+        #这个值是填写xpath表达式 
+        next_page_url_ruleXpathExpression = ''
+        -->
+        <next_page_url_ruleXpathExpression>''</next_page_url_ruleXpathExpression>
+        
+        <!--
+        #结束的列表页数的获取规则类型
+        ##例如 用正则 那么你写的正则规则要匹配出当前爬行中列表的url的页数的那个数字出来
+        ##如果改值为空 那么就获取到底了 <next_page_end_rule>''</next_page_end_rule>
+        #next_page_end_rule = "regular"
+        -->
+        <next_page_end_rule>'regular'</next_page_end_rule>
+        
+        <!--
+         #结束的列表页数的获取规则表达式
+         #对于入口类型是index的 那么正则规则可以写多个匹配 写法用python list类型定于 ['a正则规则','b正则规则']
+         #对于入口类型是list的  那么正则规则可以写一个匹配 写法用python list类型定于 ['a正则规则']
+        -->
+        <next_page_end_rule_expression>''</next_page_end_rule_expression>
+        
+        <!--
+        #如果next_page_end_rule = "regular" 那么这个值要填写终止页面数的值 例如5        
+        -->
+        <next_page_end_regular_value>''</next_page_end_regular_value>
+        
+        <!--
+        ############################################################################################
+        item变量定义
+        ############################################################################################
+        -->
+        
+        <!--
+        #提取最终页面的url规则是通过 正则 还是 通过 xpath
+        #通过规则提取最终页面的url
+        #item_page_urls_rule = "regular"    
+        #item_page_urls_rule = "xpath"    
+        -->
+        <item_page_urls_rule>'regular'</item_page_urls_rule>
+        
+        <!--
+        #提取最终页的url规则表达式
+        #item_page_rule_expression = [r'/news/\d+/n\d+\.htm$']
+        #item_page_rule_expression = //div[@class="gy-page"]/a[last()-1]/@href
+        -->
+        <item_page_rule_expression>[r'/news/\d+/n\d+\.htm$']</item_page_rule_expression>
+        
+        <!--        
+        #如果设置了  item_page_urls_rule = "regular"
+        #那么这个值才生效
+        #为空请加一对单引号 <item_page_url_ruleXpathExpression>''</item_page_url_ruleXpathExpression> 
+        #在xpath规则下拿到的html 然后再去匹配正则规则 从而拿到相对应的连接
+        #这个值是填写xpath表达式 
+        item_page_url_ruleXpathExpression = '//div[@class="list-news"]//a/@href'
+        -->
+        <item_page_url_ruleXpathExpression>''</item_page_url_ruleXpathExpression>
+        
+        <!--
+        #最终页面的url是否去重
+        #值为True 加入redis url set里面 这些url爬一次就不会再爬
+        #值为False 每次启动爬虫，这些最终页面都会爬取
+        #选择True 或者 False 没有单引号和双引号 要注意大小写
+        -->
+        <item_page_url_parse_only_one>False</item_page_url_parse_only_one>
+    </spider>
+    <!--
+            type 表示最终页分页结构类型
+            值: same代表最终页面的分页结构是一样的 有next_page属性
+                diff代表最终页面的分页结构是不一样的 没有next_page属性 在item的属性里面有next_page属性
+                
+            type值为same的时候 只能有一个item 
+            type值为same的时候并且有next_page属性 那么item的子节点有一个属性可以设置 add="true" 表示该字段的数据要和前一页的数据进行叠加
+            
+            type值为diff的时候 最后一个item没有next_page属性 代表不用去获取最终页面的分页内容 所以最后一个item一定要没有next_page属性
+            
+            next_page属性：表示最终页的分页url
+            
+            如果 next_page_rule="url" 那么表示要从rule组成url去获取另外一个最终页面的内容 那么只有type=diff才可以用组成url方式去获取另外一个最终页面的内容
+            
+    -->
+    <items type="diff">        
+        <!--
+            item里面节点代表入数据库的字段名称
+            <title></title> 该内容录入到数据表中的title字段里面
+            
+            如果这个页面的要获取相关内容是ajax调用 
+            那么item里面的节点必须要有属性type,而且type的值唯一url 
+            
+            item的属性table_name 表示这些item的值插入该数据表            
+            
+            如果要在某字段记录固定的信息 
+            那么设置item的值为@text@
+            item的属性 text为固定值的信息
+            例如 <editor text="陈开宗">@text@</editor>
+            表示editor字段记录固定信息为陈开宗
+            
+            如果要记录这行信息的url
+            那么设置item的值为@self_url@
+            例如 <url>@self_url@</url>
+            
+        -->
+        <!--产品最终页面-->
+        <!--next_page 公司信息-->
+        
+        <item table_name="test" next_page_rule="xpath" next_page='//div[@class="entry-content clearfix"]/p[1]/a[1]/@href'>-->
+            <name>//div[@id="content"]/div/h1[@class="entry-title"]/a/text()</name>
+            <editor text="陈开宗">@text@</editor>
+            <news_tyep text="news">@text@</news_tyep>
+            <url>//div[@id="content"]/div/h1[@class="entry-title"]/a/@href</url>
+            <empty></empty>
+        </item>
+        
+        <item table_name="test" next_page_rule="url" rule_no="1">                               
+            <abc>//div[@id="content"]/div/h1[@class="entry-title"]/a/text()</abc>
+            <acv>//div[@id="content"]/div/h1[@class="entry-title"]/a/@href</acv>
+        </item>
+       
+        
+        <item table_name="test">
+            <a>//div[@id="content"]/div/h1[@class="entry-title"]/a/text()</a>
+            <b>//div[@id="content"]/div/h1[@class="entry-title"]/a/@href</b>
+        </item>
+        
+        <!--
+        <item table_name="test" next_page='//div[@class="entry-content clearfix"]/p[1]/a[1]/@href'>
+            <abc>//div[@id="content"]/div/h1[@class="entry-title"]/a/text()</abc>
+            <acv>//div[@id="content"]/div/h1[@class="entry-title"]/a/@href</acv>
+        </item>
+        
+        <item table_name="test">
+            <a>//div[@id="content"]/div/h1[@class="entry-title"]/a/text()</a>
+            <b>//div[@id="content"]/div/h1[@class="entry-title"]/a/@href</b>
+        </item>
+        -->
+        <!--
+        如果是@self_url@ 代表当前最终页面的url
+        -->
+        <!--联系我们页面-->
+        <!--
+        <item table_name="test">
+            <name>//title</name>
+            <url>@self_url@</url>
+        </item>
+        -->
+    </items>
+    
+    <rules>
+        <rule>
+            <url>http://laputa.china.alibaba.com/offer/ajax/OfferDesc.do</url>
+            <!--url 与 参数 之间的连接符号-->
+            <link_symbols>?</link_symbols>
+            <!--参数 与 参数 之间的连接符号-->
+            <parame_link_symbols>&amp;</parame_link_symbols>
+            <!--参数name 与 参数value 之间的连接符号 &-->
+            <parame_value_symbols>=</parame_value_symbols>
+            <parame_value>
+                <!--参数名称-->
+                <!--表示从xpath可以直接可以获取值-->
+                <offerId>
+                    <xpath>'//input[@id="offerId"]/@value'</xpath>
+                    <regular_in_xpath>''</regular_in_xpath>
+                </offerId>
+                <!--表示从当前url用正则匹配获取值-->
+                <callback>
+                    <xpath>''</xpath>
+                    <regular_in_xpath>'\D+(\d+)\.html'</regular_in_xpath>
+                </callback>
+                <!--表示从xpath获取内容然后再用正则匹配获取值-->
+                <callback1>
+                    <xpath>'//input[@name="url"]/@value'</xpath>
+                    <regular_in_xpath>'\D+(\d+)\.html'</regular_in_xpath>
+                </callback1>
+            </parame_value>                
+        </rule>        
+    </rules>
+    <!--
+        storage里面的节点代表某个存储设备的配置
+    -->
+    <storage>
+        <type>mysql</type>
+        <host>localhost</host>
+        <user>root</user>
+        <password>123456</password>        
+        <port>3306</port>
+        <db_name>test</db_name>
+    </storage>    
+</scrapy>
