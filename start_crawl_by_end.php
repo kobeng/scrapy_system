@@ -8,7 +8,7 @@
 
 echo date('Y-m-d H:i:s');
 echo "\n";
-include '/home/scrapy/create_scrapy_project/api.php';
+include '/home/scrapy/scrapy_system/api.php';
 
 $ports = array(
     6800,6801,6802,6803,6804,6805,6806,6807,6808,6809,6810,6811
