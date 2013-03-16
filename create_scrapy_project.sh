@@ -65,7 +65,7 @@ if [ ! -e "${php_create_spiders_path}/spiders/" ] ; then
 fi
 
 
-cd "${all_project_path}/../create_scrapy_project/"
+cd "${all_project_path}/../scrapy_system/"
 
 #删除之前生成爬虫文件
 rm -f "${php_create_spiders_path}/"*.py
@@ -91,5 +91,5 @@ cd "${all_project_path}/${PORT}/${PROJECT_NAME}"
 scrapy deploy $PROJECT_NAME
 
 #删除xml文件里面没有project
-cd "${all_project_path}/../create_scrapy_project/"
+cd "${all_project_path}/../scrapy_system/"
 php del_project.php ${PORT}
