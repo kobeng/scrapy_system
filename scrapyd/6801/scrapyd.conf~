@@ -1,0 +1,9 @@
+[scrapyd]
+http_port  = 6801
+debug      = on
+#max_proc  = 1
+max_proc_per_cpu = 10
+eggs_dir   = /home/scrapy/scrapyd/6801/eggs
+dbs_dir    = /home/scrapy/scrapyd/6801/dbs
+items_dir  = /home/scrapy/scrapyd/6801/items
+logs_dir   = /home/scrapy/scrapyd/6801/logs

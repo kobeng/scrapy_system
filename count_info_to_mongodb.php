@@ -5,7 +5,7 @@ $time_start =  strtotime(date("Y-m-d 00:00:00",strtotime("-1 day")));
 $time_end =  strtotime(date("Y-m-d 23:59:59",strtotime("-1 day")));
 
 
-$mongo = new MongoClient("mongodb:///scrapy",array("wTimeout" => 30000));
+$mongo = new MongoClient("mongodb://scrapy:scrapy@192.168.0.71:27017/scrapy",array("wTimeout" => 30000));
 $db = $mongo->selectDB("scrapy");
 $spider_stats_collection = $mongo->selectDB("scrapy")->selectCollection("spider_stats");
 
