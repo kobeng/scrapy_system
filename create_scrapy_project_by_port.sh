@@ -13,7 +13,7 @@ filelist=`ls ${all_project_path}'/../xml/'${PORT}'/'`
 for dirname in $filelist
 do    
     if test -d ${all_project_path}'/../xml/'${PORT}'/'${dirname};then
-        cd ${all_project_path}'/../create_scrapy_project/'
+        cd ${all_project_path}'/../scrapy_system/'
         ./create_scrapy_project.sh ${PORT} ${dirname}                
     fi
 done
